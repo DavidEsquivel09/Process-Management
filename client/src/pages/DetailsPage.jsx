@@ -1,41 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useOffer } from '.././context/OfferContext'
+import { useOffer } from '.././context/OfferContext'; // No modificar la importación.
 
 function DetailsPage() {
 
-    const { getOffer } = useOffer()
-    const { id } = useParams()
-    const [ offer, setOffer ] = useState(null)
+    const { getProcess } = useOffer(); // Renombrar la función en el contexto al propósito actual.
+    const { id } = useParams();
+    const [process, setProcess] = useState(null); // Cambiar el estado de "offer" a "process".
 
     useEffect(() => {
-        async function loadOffer() {
+        async function loadProcess() {
             if (id) {
-                const offerDetailed = await getOffer(id)
-                console.log(id)
-                setOffer(offerDetailed)
-                console.log(offerDetailed)
+                const processDetailed = await getProcess(id); // Llamar a la función renombrada.
+                console.log(id);
+                setProcess(processDetailed); // Actualizar con el nuevo nombre.
+                console.log(processDetailed);
             }
         }
-        loadOffer()
-    }, [])
+        loadProcess();
+    }, []);
 
-    return offer ? (
-            <div className='flex h-[calc(100vh - 100px)] items-center justify-center'>
-                <div className='bg-zinc-800 max-w-md p-10 my-20 rounded-md'>
-                    <h1>Title</h1>
-                    <p className="bg-purple-700 max-w-md p-2 my-2 rounded-md">{offer.title}</p>
-                    <h1>Location</h1>
-                    <p className="bg-purple-700 max-w-md p-2 my-2 rounded-md">{offer.location}</p>
-                    <h1>Salary</h1>
-                    <p className="bg-purple-700 max-w-md p-2 my-2 rounded-md">USD ${offer.salary}</p>
-                    <h1>Details</h1>
-                    <p className="bg-purple-700 max-w-md p-2 my-2 rounded-md">{offer.details}</p>
-                </div>
+    return process ? (
+        <div className='flex h-[calc(100vh - 100px)] items-center justify-center'>
+            <div className='bg-zinc-800 max-w-md p-10 my-20 rounded-md'>
+                <h1>Title</h1>
+                <p className="bg-purple-700 max-w-md p-2 my-2 rounded-md">{process.title}</p>
+                <h1>Start Date</h1>
+                <p className="bg-purple-700 max-w-md p-2 my-2 rounded-md">{new Date(process.startDate).toLocaleDateString()}</p>
+                <h1>End Date</h1>
+                <p className="bg-purple-700 max-w-md p-2 my-2 rounded-md">{new Date(process.endDate).toLocaleDateString()}</p>
+                <h1>Status</h1>
+                <p className="bg-purple-700 max-w-md p-2 my-2 rounded-md">{process.status}</p>
+                <h1>Details</h1>
+                <p className="bg-purple-700 max-w-md p-2 my-2 rounded-md">{process.details}</p>
             </div>
-        ) : (
-            <p>Error: Offer not found.</p>
-    )
+        </div>
+    ) : (
+        <p>Error: Process not found.</p>
+    );
 }
 
-export default DetailsPage
+export default DetailsPage;

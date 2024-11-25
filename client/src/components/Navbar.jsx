@@ -9,7 +9,7 @@ function Navbar() {
     return (
         <nav className='bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg'>
             <Link to={ isLogedIn ? '/myOffers' : '/' }>
-                <h1 className='text-2xl font-bold'>Offers Manager</h1>
+                <h1 className='text-2xl font-bold'>Process Managment</h1>
             </Link>
             <ul className='flex gap-x-2'>
                 {isLogedIn ? (                    
@@ -18,10 +18,10 @@ function Navbar() {
                             Welcome {user.firstName}
                         </li>
                         <li>
-                            <Link to='/myOffers' className='bg-indigo-500 px-4 py-1 rounded-sm'>My Offers</Link>
+                            <Link to='/myOffers' className='bg-indigo-500 px-4 py-1 rounded-sm'>Process</Link>
                         </li>
                         <li>
-                            <Link to='/offer' className='bg-indigo-500 px-4 py-1 rounded-sm'>Create Offer</Link>
+                            <Link to='/offer' className='bg-indigo-500 px-4 py-1 rounded-sm'>Create Process</Link>
                         </li>
                         <li>
                             <Link to='/' onClick={ () => logout() } className='bg-indigo-500 px-4 py-1 rounded-sm'>Logout</Link>
